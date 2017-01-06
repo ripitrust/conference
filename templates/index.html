@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div id="content">
+<a-scene>
+    <a-assets>
+      <img id="home" crossorigin="anonymous" src="../static/media/home360.jpg">
+      </a-assets>
+      <a-sky rotation="0 290 0" id="image-360" radius="10" src="#home"></a-sky>
+
+</a-scene>
+</div>
+{% endblock %}
