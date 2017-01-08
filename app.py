@@ -24,6 +24,11 @@ def place_page():
     return render_template('places.html')
 
 
+@app.route('/test')
+def experiment_page():
+    return render_template('experiment.html')
+
+
 
 if __name__ == '__main__':
 

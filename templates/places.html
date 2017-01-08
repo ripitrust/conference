@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 
+ {% block header %}
+ <header id="top">
+        <nav>
+            <ul>
+             <li><a href="/index">Home</a></li>
+             <li><a href="/places">Places</a></li>
+             <li><a href="/events">Events</a></li>
+             <li><a href="/foods">Foods</a></li>
+             <li><b>2017 Conference</b></li>
+            </ul>
+        </nav>
+    </header>
+{% endblock %}  
+
 {% block body %}
 <div id="content">
 <a-scene>

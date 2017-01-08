@@ -1,32 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    {% block head %}
     <title>VR Enabled Conference</title>
     <meta charset=“utf-8”>
-    <link rel="stylesheet" href="../static/css/style.css">
     <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
-    {% endblock %}
 
- </style>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/jquery.fullPage.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script
+          src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+          crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/jquery.fullPage.min.js"></script>
+    <script type="text/javascript">
+
+    // $(document).ready(function() {
+    //         $('#fullpage').fullpage();
+    //     });
+        
+
+    </script>
+    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+
 </head>
 
 <body>
 
     {% block header %}
-    <header id="top">
-        <nav>
-            <ul>
-             <li><a href="/index">Home</a></li>
-             <li><a href="/places">Places</a></li>
-             <li><a href="/events">Events</a></li>
-             <li><a href="/foods">Foods</a></li>
-             <li><b>2017 Conference</b></li>
-            </ul>
-        </nav>
-    </header>
     {% endblock %}
 
     {% block body %}
