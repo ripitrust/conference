@@ -18,6 +18,17 @@
     // $(document).ready(function() {
     //         $('#fullpage').fullpage();
     //     });
+    AFRAME.registerComponent('hide-on-enter-vr-click', {
+  schema: {type: 'selector'},
+
+  init: function () {
+    var element = this.data;
+    var button = this.el.querySelector('.a-enter-vr-button');
+    button.addEventListener('click', function () {
+      element.style.opacity = 0;
+    });
+  }
+});
         
 
     </script>

@@ -1,4 +1,4 @@
-/* global AFRAME */
+ /* global AFRAME */
 
 /**
  * Component that listens to an event, fades out an entity, swaps the texture, and fades it
@@ -15,6 +15,7 @@ AFRAME.registerComponent('set-image', {
   init: function () {
     var data = this.data;
     var el = this.el;
+    console.log(this);
 
     this.setupFadeAnimation();
 
@@ -35,6 +36,7 @@ AFRAME.registerComponent('set-image', {
   setupFadeAnimation: function () {
     var data = this.data;
     var targetEl = this.data.target;
+
 
     // Only set up once.
     if (targetEl.dataset.setImageFadeSetup) { return; }
