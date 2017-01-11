@@ -14,13 +14,23 @@
   <body>
     <a-scene>
       <a-assets>
-        <img id="mbs" src="static/media/mbs360.jpg">
-        <img id="mbs-thumb" src="static/media/mbs-thumb.jpg">
+        <img id="home-thumb" src="static/media/home-thumb.png">
+        <img id="arrival-thumb" src="static/media/arrival-thumb.png">
+        <img id="stay-thumb" src="static/media/stay-thumb.png">
+        <img id="events-thumb" src="static/media/events-thumb.png">
+        <img id="nature-thumb" src="static/media/nature-thumb.png">
+        <img id="home" src="static/media/gbb360.jpg">
+        <img id="stay" src="static/media/stay360.jpg">
+        <img id="arrival" src="static/media/arrival360.jpg">
+        <img id="event" src="static/media/event360.jpg">
+        <img id="nature" src="static/media/nature360.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="static/media/click.wav"></audio>
+        <video id="event-video" src="static/media/event2.mp4"></video>
         <!-- Image link template to be reused. -->
         <script id="link" type="text/html">
           <a-entity class="link"
-            geometry="primitive: plane; height: 1; width: 1"
-            material="shader: flat; src: ${thumb}"
+            geometry="primitive: circle; radius: 0.5;"
+            material="shader: flat; src: ${thumb}; opacity: 0.6;"
             event-set__1="_event: mousedown; scale: 1 1 1"
             event-set__2="_event: mouseup; scale: 1.2 1.2 1"
             event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
@@ -31,14 +41,21 @@
       </a-assets>
 
       <!-- 360-degree image. -->
-      <a-sky id="image-360" radius="10" src="#mbs"></a-sky>
+      <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#home"></a-sky>
+      <!-- <a-video src="#event-video" autoplay loop="true"></a-video> -->
 
       <!-- Image links. -->
-      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-        <a-entity template="src: #link" data-src="#mbs" data-thumb="#mbs-thumb"></a-entity>
+      <a-entity id="links" layout="type: line; margin: 1.5" position="-4 2.2 -4">
+          <a-entity template="src: #link" data-src="#home" data-thumb="#home-thumb"></a-entity>
+          <a-entity template="src: #link" data-src="#arrival" data-thumb="#arrival-thumb"></a-entity>
+          <a-entity template="src: #link" data-src="#stay" data-thumb="#stay-thumb"></a-entity>
+          <a-entity template="src: #link" data-src="#event" data-thumb="#events-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#nature" data-thumb="#nature-thumb"></a-entity>
+        <!-- <a-cone color="tomato" radius-bottom="1" radius-top="0.5" displacement-bias="1"></a-cone> -->
+        <!-- <a-entity template="src: #link" data-src="#home" data-thumb="#architecture-thumb"></a-entity> -->
       </a-entity>
 
-      <!-- Camera + cursor. -->
+      <!-- Camera + cursor.  -->
       <a-entity camera look-controls>
         <a-cursor id="cursor"
           animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
@@ -47,6 +64,6 @@
           event-set__2="_event: mouseleave; color: black"
           raycaster="objects: .link"></a-cursor>
       </a-entity>
-    </a-scene>
+   </a-scene>
   </body>
 </html>
