@@ -11,32 +11,70 @@ AFRAME.registerComponent('show-navigation', {
 
         var data = this.data;
         var el = this.el;
+        var that = this;
 
       el.addEventListener("click", function () {
 
 
            var target = data.target;
 
-           var hideTarget = document.querySelectorAll(".sub-control");
+           var subcontrols = document.querySelectorAll(".sub-control");
 
-           console.log(hideTarget);
+           var hideElement = data.hide;
 
-            if (hideTarget) {
+            if (subcontrols) {
 
-                    hideTarget.forEach( function(v, i) {
+                    subcontrols.forEach( function(v, i) {
 
-                        v.setAttribute("visible", "false");
+                    
+                        that.hideChildren(v);
+
 
                     })
+            }
+
+            if (hideElement) {
+
+               
+
+                that.hideChildren(hideElement);
 
             }
 
             if (target) {
+                
                 target.setAttribute("visible", "true");
+
+                that.showChildren(target);
+
+
             }
 
 
     });
+
+    },
+
+
+    hideChildren: function (parentNode) {
+
+            for (var k = 0; k < parentNode.children.length; k ++) {
+
+                              
+                                parentNode.children[k].children[0].setAttribute("visible", "false");
+
+                        }
+
+    },
+
+    showChildren: function (parentNode) {
+
+            for (var k = 0; k < parentNode.children.length; k ++) {
+
+                              
+                                parentNode.children[k].children[0].setAttribute("visible", "true");
+
+                        }
 
     }
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Photonic Conference</title>
-    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <meta name="description" content="photonic-conference">
     <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
     <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
     <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
@@ -15,7 +15,7 @@
   <body>
     <a-scene>
       <a-assets>
-
+        <!-- Image links. -->
         <img id="home-thumb" src="static/media/home-thumb.png">
         <img id="arrival-thumb" src="static/media/arrival-thumb.png">
         <img id="stay-thumb" src="static/media/stay-thumb.png">
@@ -24,27 +24,56 @@
         <img id="ball-thumb" src="static/media/ball-thumb.png">
         <img id="hotel-thumb" src="static/media/hotel-thumb.png">
 
+
         <img id="premium-thumb" src="static/media/premium-thumb.png">
         <img id="deluxe-thumb" src="static/media/deluxe-thumb.png">
-        <img id="orchid-thumb" src="static/media/orchid-thumb.png">
+        <img id="suite-thumb" src="static/media/orchid-thumb.png">
+
+
+        <img id="back-thumb" src="static/media/back-thumb.png">
+        <img id="direct-thumb" src="static/media/direct-thumb.png">
+        <img id="direct2-thumb" src="static/media/direct2-thumb.png">
+        <img id="direct3-thumb" src="static/media/direct3-thumb.png">
+        <img id="direct4-thumb" src="static/media/direct4-thumb.png">
 
         <img id="home" src="static/media/gbb360.jpg">
         <img id="stay" src="static/media/stay360.jpg">
         <img id="arrival" src="static/media/arrival360.jpg">
         <img id="event" src="static/media/event360.jpg">
         <img id="nature" src="static/media/nature360.jpg">
-        <img id="meeting3" src="static/media/3meeting360.jpg">
-        <img id="room1" src="static/media/room360.jpg">
+        
+        <img id="ballroom360" src="static/media/ballroom360.jpg">
+        <img id="ballroom360-front" src="static/media/ballroom360-front.jpg">
+        <img id="ballroom360-back" src="static/media/ballroom360-back.jpg">
+        
+        
+        <img id="room" src="static/media/room360.jpg">
+
         <img id="deluxe360" src="static/media/deluxe360.jpg">
-        <img id="orchid360" src="static/media/suite360.jpg">
+        <img id="deluxe360-toilet" src="static/media/deluxe360-toilet.jpg">
+        <img id="deluxe360-balcony" src="static/media/deluxe360-balcony.jpg">
+
+        <img id="suite360" src="static/media/suite360.jpg">
+        <img id="suite360-right" src="static/media/suite360-right.jpg">
+        <img id="suite360-left" src="static/media/suite360-left.jpg">
+        <img id="suite360-toilet" src="static/media/suite360-toilet.jpg">
+        <img id="suite360-room" src="static/media/suite360-room.jpg">
+        <img id="suite360-roomright" src="static/media/suite360-roomright.jpg">
+        <img id="suite360-roomleft" src="static/media/suite360-roomleft.jpg">
+     
+
         <img id="premium360" src="static/media/premium360.jpg">
+        <img id="premium360-toilet" src="static/media/premium360-toilet.jpg">
+        <img id="premium360-balcony" src="static/media/premium360-balcony.jpg">
+        
+
         <audio id="click-sound" crossorigin="anonymous" src="static/media/click.wav"></audio>
         <!-- <video id="event-video" src="static/media/event2.mp4"></video> -->
         <!-- Image link template to be reused. -->
         <script id="link" type="text/html">
           <a-entity class="link"
             geometry="primitive: circle; radius: 0.4;"
-            material="shader: flat; src: ${thumb}; opacity: 0.5;"
+            material="shader: flat; src: ${thumb}; opacity: ${opacity};"
             event-set__1="_event: mousedown; scale: 1 1 1"
             event-set__2="_event: mouseup; scale: 1.2 1.2 1"
             event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
@@ -52,42 +81,51 @@
             set-image="on: click; target: #image-360; src: ${src}"
             sound="on: click; src: #click-sound"></a-entity>
         </script>
-
-          <script id="link-concrete" type="text/html">
-          <a-entity class="link"
-            geometry="primitive: circle; radius: 0.4;"
-            material="shader: flat; src: ${thumb}; opacity: 0.9;"
-            event-set__1="_event: mousedown; scale: 1 1 1"
-            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
-            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
-            event-set__4="_event: mouseleave; scale: 1 1 1"
-            set-image="on: click; target: #image-360; src: ${src}"
-            sound="on: click; src: #click-sound"></a-entity>
-        </script>
-      </a-assets>
+	</a-assets>
 
 
       
-       <a-entity visible="false" id="room-control" class="sub-control">
+       
+      
+      
+      <!-- main-nav -->
+     <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#home"></a-sky>
 
-            <a-entity 
-              position="-1 -2.5 -3" template="src: #link-concrete" data-src="#deluxe360" data-thumb="#deluxe-thumb">
-            </a-entity>
+        <a-entity visible="true" id="main-control" layout="type: line; margin: 1.2" position="-3.5 2.5 -4" class="sub-control">
 
-            <a-entity  position="0 -2.5 -3" template="src: #link-concrete" data-src="#orchid360" data-thumb="#orchid-thumb"></a-entity>
-            <a-entity  position="1 -2.5 -3" template="src: #link-concrete" data-src="#premium360" data-thumb="#premium-thumb"></a-entity>
+          <a-entity template="src: #link" show-navigation="target: #main-control; hide: .sub-control" data-src="#home" data-thumb="#home-thumb" data-opacity="0.6">
+          </a-entity>
 
-      </a-entity>
+          <a-entity template="src: #link" show-navigation="target: #main-control; hide: .sub-control" data-src="#arrival" data-thumb="#arrival-thumb" data-opacity="0.6">
+  		  </a-entity>
+
+          <a-entity template="src: #link" show-navigation="target: #stay-control; hide: .sub-control" data-src="#stay" data-thumb="#stay-thumb" data-opacity="0.6">
+          </a-entity>
+
+          <a-entity template="src: #link" show-navigation="target: #main-control; hide: .sub-control" data-src="#nature" data-thumb="#nature-thumb" data-opacity="0.6"> 
+          </a-entity>
+
+<!--           <a-entity template="src: #link" show-navigation="name: hello world; hide: .sub-control" 
+                    data-src="#event-video" data-thumb="#events-thumb"></a-entity>
+ -->
+        
+        <!-- <a-cone color="tomato" radius-bottom="1" radius-top="0.5" displacement-bias="1"></a-cone> -->
+        <!-- <a-entity template="src: #link" data-src="#home" data-thumb="#architecture-thumb"></a-entity> -->
 
 
+        </a-entity>
+
+      <!-- sub-nav -->
+
+      <!-- Stay -->
        <a-entity visible="false" id="stay-control" class="sub-control" >
 
-            <a-entity 
-              
-              position="-1 -2 -3" template="src: #link-concrete" data-src="#room1" data-thumb="#hotel-thumb" 
-              show-navigation="target: #room-control; hide: .sub-control" >
-              
-            </a-entity>
+            <a-entity  position="-1 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#room" data-thumb="#hotel-thumb" 
+             show-navigation="target: #room-control; hide: .sub-control"></a-entity>
+
+            <a-entity  position="0.4 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#ballroom360" data-thumb="#ball-thumb" 
+            show-navigation="target: #ballroom-control; hide: .sub-control"></a-entity>
+
 <!--             <a-cone color="white" radius-bottom="0.2" radius-top="0"
                     class="link"
                     rotation="90 0 270"
@@ -110,33 +148,178 @@
                     set-image="on: click; target: #image-360; src: #meeting3"
                     sound="on: click; src: #click-sound"></a-cone>
  -->
-            <a-entity  position="1 -2 -3" template="src: #link-concrete" data-src="#meeting3" data-thumb="#ball-thumb"></a-entity>
+
+       </a-entity>
+
+
+
+		
+      
+      <!-- HOTEL ROOM CONTROL-->
+      <a-entity visible="false" id="room-control" class="sub-control">
+
+            <a-entity position="-1.8 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#stay"  data-thumb="#back-thumb" show-navigation="target: #stay-control; hide: .sub-control"></a-entity>
+
+            <a-entity position="-0.8 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#deluxe360" data-thumb="#deluxe-thumb" show-navigation="target: #deluxe-control; hide: .sub-control"></a-entity>
+
+    		<a-entity  position="0.2 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#suite360" data-thumb="#suite-thumb" show-navigation="target: #suite-control; hide: .sub-control">></a-entity>
+
+            <a-entity  position="1.2 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#premium360" data-thumb="#premium-thumb" show-navigation="target: #premium-control; hide: .sub-control"></a-entity>
 
       </a-entity>
 
 
-      <!-- 360-degree image. -->
-      <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#home"></a-sky>
+      
+      <!-- DELUXE ROOM -->
+      <a-entity visible="false" id="deluxe-control" class="sub-control">
 
-      <a-entity id="links" layout="type: line; margin: 1.5" position="-4 2.2 -4">
-          <a-entity template="src: #link" show-navigation="name: hello world; hide: .sub-control" 
-                    data-src="#home" data-thumb="#home-thumb"></a-entity>
-          <a-entity template="src: #link" show-navigation="name: hello world; hide: .sub-control" 
-                    data-src="#arrival" data-thumb="#arrival-thumb"></a-entity>
+			 <a-entity position="0 -0.5 -4" template="src: #link" data-opacity="0.6" data-src="#room"  data-thumb="#back-thumb" show-navigation="target: #room-control; hide: .sub-control"></a-entity>
 
-          <a-entity template="src: #link" show-navigation="name: hello world; target: #stay-control"
-                    data-src="#stay" data-thumb="#stay-thumb"></a-entity>
+             <a-entity position="3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#deluxe360-toilet"  data-thumb="#direct-thumb" show-navigation="target: #deluxe-toilet-control; hide: .sub-control"></a-entity>
 
-<!--           <a-entity template="src: #link" show-navigation="name: hello world; hide: .sub-control" 
-                    data-src="#event-video" data-thumb="#events-thumb"></a-entity>
- -->
-          <a-entity template="src: #link" show-navigation="name: hello world; hide: .sub-control" 
-                    data-src="#nature" data-thumb="#nature-thumb"></a-entity>
-        <!-- <a-cone color="tomato" radius-bottom="1" radius-top="0.5" displacement-bias="1"></a-cone> -->
-        <!-- <a-entity template="src: #link" data-src="#home" data-thumb="#architecture-thumb"></a-entity> -->
+             <a-entity position="-3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#deluxe360-balcony"  data-thumb="#direct2-thumb" show-navigation="target: #deluxe-balcony-control; hide: .sub-control"></a-entity>
+          
+       </a-entity>
+
+
+       
+       <a-entity visible="false" id="deluxe-balcony-control" class="sub-control">
+
+           <a-entity position="-1 -2.5 -2.5" template="src: #link" data-opacity="0.9" data-src="#deluxe360"  data-thumb="#direct4-thumb" show-navigation="target: #deluxe-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+       
+       <a-entity visible="false" id="deluxe-toilet-control" class="sub-control">
+
+           <a-entity position="3 -3 -1" template="src: #link" data-opacity="0.9" data-src="#deluxe360"  data-thumb="#direct-thumb" show-navigation="target: #deluxe-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+       
+       <!-- SUITE ROOM  -->
+       <a-entity visible="false" id="suite-control" class="sub-control">
+
+			 <a-entity position="0 -0.5 -4" template="src: #link" data-opacity="0.6" data-src="#room"  data-thumb="#back-thumb" show-navigation="target: #room-control; hide: .sub-control"></a-entity>
+
+             <a-entity position="3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360-right"  data-thumb="#direct-thumb" show-navigation="target: #suite-right-control; hide: .sub-control"></a-entity>
+
+             <a-entity position="-3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360-left"  data-thumb="#direct2-thumb" show-navigation="target: #suite-left-control; hide: .sub-control"></a-entity>
+
+             <a-entity position="4 -0.6 -4" template="src: #link" data-opacity="0.9" data-src="#suite360-room"  data-thumb="#direct4-thumb" 
+             show-navigation="target: #suite-room-control; hide: .sub-control"></a-entity>
+          
+        </a-entity>
+
+
+
+        <a-entity visible="false" id="suite-right-control" class="sub-control">
+
+           <a-entity position="-1 -2.5 -4" template="src: #link" data-opacity="0.9" data-src="#suite360-toilet"  data-thumb="#direct2-thumb" show-navigation="target: #suite-toilet-control; hide: .sub-control"></a-entity>
+
+           <a-entity position="-3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360"  data-thumb="#direct2-thumb" show-navigation="target: #suite-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+       <a-entity visible="false" id="suite-toilet-control" class="sub-control">
+
+           <a-entity position="-5 -1 0" template="src: #link" data-opacity="0.9" data-src="#suite360-right"  data-thumb="#direct2-thumb" show-navigation="target: #suite-right-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+
+
+
+       
+       <a-entity visible="false" id="suite-left-control" class="sub-control">
+
+           <a-entity position="3 -3 -1" template="src: #link" data-opacity="0.9" data-src="#suite360"  data-thumb="#direct-thumb" show-navigation="target: #suite-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+
+       <a-entity visible="false" id="suite-room-control" class="sub-control">
+
+           <a-entity position="0 -0.5 -4" template="src: #link" data-opacity="0.6" data-src="#suite360"  data-thumb="#back-thumb" show-navigation="target: #suite-control; hide: .sub-control"></a-entity>
+
+           <a-entity position="3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360-roomright"  data-thumb="#direct-thumb" show-navigation="target: #suite-roomright-control; hide: .sub-control"></a-entity>
+
+           <a-entity position="-3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360-roomleft"  data-thumb="#direct2-thumb" show-navigation="target: #suite-roomleft-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+       <a-entity visible="false" id="suite-roomright-control" class="sub-control">
+
+           <a-entity position="4 -2 -5" template="src: #link" data-opacity="0.9" data-src="#suite360-room"  data-thumb="#direct2-thumb" show-navigation="target: #suite-room-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+       <a-entity visible="false" id="suite-roomleft-control" class="sub-control">
+
+           <a-entity position="-3 -1 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360-room"  data-thumb="#direct2-thumb" show-navigation="target: #suite-room-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+
+
+
+
+
+       <!-- PREMIUM ROOM  -->
+       <a-entity visible="false" id="premium-control" class="sub-control">
+
+			 <a-entity position="0 -0.5 -4" template="src: #link" data-opacity="0.6" data-src="#room"  data-thumb="#back-thumb" show-navigation="target: #room-control; hide: .sub-control"></a-entity>
+
+             <a-entity position="3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#premium360-balcony"  data-thumb="#direct-thumb" show-navigation="target: #premium-balcony-control; hide: .sub-control"></a-entity>
+
+             <a-entity position="-3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#premium360-toilet"  data-thumb="#direct2-thumb" show-navigation="target: #premium-toilet-control; hide: .sub-control"></a-entity>
+          
+       </a-entity>
+
+
+       
+       <a-entity visible="false" id="premium-balcony-control" class="sub-control">
+
+           <a-entity position="-1 -2.5 -2.5" template="src: #link" data-opacity="0.9" data-src="#premium360"  data-thumb="#direct4-thumb" show-navigation="target: #premium-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+       
+       <a-entity visible="false" id="premium-toilet-control" class="sub-control">
+
+           <a-entity position="3 -3 -1" template="src: #link" data-opacity="0.9" data-src="#premium360"  data-thumb="#direct-thumb" show-navigation="target: #premium-control; hide: .sub-control"></a-entity>
+
+       </a-entity>
+
+
+
+
+       <!-- BALL ROOM CONTROL  -->
+       <a-entity visible="false" id="ballroom-control" class="sub-control">
+
+            <a-entity position="-2.5 -2.5 -4" template="src: #link" data-opacity="0.8" data-src="#stay"  data-thumb="#back-thumb" show-navigation="target: #stay-control; hide: .sub-control"></a-entity>
+
+            <a-entity position="-1 -2.5 -4" template="src: #link" data-opacity="0.9" data-src="#ballroom360-front"  data-thumb="#direct4-thumb" show-navigation="target: #ballroom-front-control; hide: .sub-control"></a-entity>
+
+            <a-entity position="-3 -2 -1" template="src: #link" data-opacity="0.9" data-src="#ballroom360-back"  data-thumb="#direct3-thumb" show-navigation="target: #ballroom-back-control; hide: .sub-control"></a-entity>
+
       </a-entity>
 
-      <!-- Image links. -->
+
+
+
+       
+
+      
 
       <!-- Camera + cursor.  -->
       <a-entity camera look-controls>
