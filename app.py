@@ -26,6 +26,7 @@ def place_page():
 
 @app.route('/test')
 def experiment_page():
+
     return render_template('experiment.html')
 
 
