@@ -1,0 +1,122 @@
+{% extends "vrbase.html" %}
+
+{% block body %}
+  <a-scene id="ancestor">
+      <a-assets loader="src: 123">
+        <!-- Image links. -->
+        <img id="home-thumb" src="static/media/home-thumb.png">
+        <img id="arrival-thumb" src="static/media/arrival-thumb.png">
+        <img id="stay-thumb" src="static/media/stay-thumb.png">
+        <img id="events-thumb" src="static/media/events-thumb.png">
+        <img id="nature-thumb" src="static/media/nature-thumb.png">
+        <img id="ball-thumb" src="static/media/ball-thumb.png">
+        <img id="hotel-thumb" src="static/media/hotel-thumb.png">
+
+        <img id="home" src="static/media/gbb360.jpg">
+        <img id="stay" src="static/media/stay360.jpg">
+
+        <audio id="click-sound" crossorigin="anonymous" src="static/media/click.wav"></audio>
+        <!-- <video id="event-video" src="static/media/event2.mp4"></video> -->
+        <!-- Image link template to be reused. -->
+
+        <script id="link" type="text/html">
+          <a-entity class="enabled"
+            geometry="primitive: circle; radius: 0.4;"
+            material="shader: flat; src: ${thumb}; opacity: ${opacity};"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            onClick="changeToStay()"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+    </a-assets>
+
+    <!-- Camera + cursor.  -->
+      <a-entity camera position="2 0 3" look-controls>
+
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          raycaster="objects: .enabled"></a-cursor>
+      </a-entity>
+
+    
+     <a-entity id="scene1" visible="true" class="scene">
+
+         <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#home"></a-sky>
+
+          <a-entity id="main-control" layout="type: line; margin: 1.2" position="-3.5 2.5 -4" class="sub-control">
+
+              <a-entity template="src: #link" data-src="#home" data-thumb="#home-thumb" data-opacity="0.6">
+              </a-entity>
+
+              <a-entity template="src: #link" show-navigation="target: #main-control; hide: .sub-control" data-src="#arrival" data-thumb="#arrival-thumb" data-opacity="0.6">
+              </a-entity>
+
+              <a-entity template="src: #link" data-href="stay" data-hash="hall" data-src="#stay" data-thumb="#stay-thumb" data-opacity="0.6">
+              </a-entity>
+
+              <a-entity template="src: #link" show-navigation="target: #main-control; hide: .sub-control" data-src="#nature" data-thumb="#nature-thumb" data-opacity="0.6"> 
+              </a-entity>
+
+          </a-entity>
+
+
+    </a-entity>
+
+    <a-entity id="scene2" visible="false" class="scene">
+
+        <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#stay"></a-sky>
+
+          <a-entity id="main-control" layout="type: line; margin: 1.2" position="-3.5 2.5 -4" class="sub-control">
+
+              <a-entity template="src: #link" onClick="goHome()" data-src="#home" data-thumb="#home-thumb" data-opacity="0.6">
+              </a-entity>
+
+          </a-entity>
+
+        <a-entity  position="-1 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#room" data-thumb="#hotel-thumb"></a-entity>
+        <a-entity  position="0.4 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#ballroom360" data-thumb="#ball-thumb"></a-entity>
+
+    </a-entity>
+
+
+      
+   </a-scene>
+
+    <script type="text/javascript">
+
+  function changeToStay() {
+    var old =  document.getElementById('scene1');
+    var newNode=  document.getElementById('scene2');
+
+
+    old.setAttribute("visible", "false");
+    old.className = "deactive";
+    newNode.setAttribute("visible", "true");
+    newNode.className = "active";
+
+  };
+
+
+  function goHome() {
+
+    var old =  document.querySelector(".active");
+    var newNode=  document.getElementById('scene1');
+
+    old.setAttribute("visible", "false");
+    old.className = "deactive";
+    
+    newNode.setAttribute("visible", "true");
+    newNode.className = "active";
+
+  };
+
+
+  </script>
+
+
+{% endblock %}

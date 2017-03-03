@@ -1,43 +1,25 @@
 AFRAME.registerComponent('route', {
 
-
     schema: {
 
-        location: {type: "string"},
-        index: {type: "boolean"}
+        href: {type: "string"},
+        hash: {type: "string"}
 
     },
 
-
     init: function() {
 
+            var href = this.data.href;
+            var hash = this.data.hash;
+            var el = this.el;
 
-        var data = this.data;
-        var el = this.el;
+             el.addEventListener("click", function () {
 
-        var location = data.location;
+                console.log("clicked");
 
-        var routes = window.routes || {};
+                location.assign( "/" + href + "#" + hash );
 
-        routes[location] = this.el;
-
-        window.routes = routes;
-
-
-        window.onpopstate = function(e) {
-
-
-            var routes = window.routes;
-
-            console.log(e.state);
-
-
-
-
-        } ;
-
-
-
+             });
 
     },
 

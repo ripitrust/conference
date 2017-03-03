@@ -4,8 +4,17 @@ application = Flask(__name__)
 
 
 @application.route('/index')
-def home_page():
+def index_page():
     return render_template('index.html')
+
+
+@application.route('/home')
+def home_page():
+    return render_template('home.html')
+
+@application.route('/stay')
+def stay_page():
+    return render_template('stay.html')
 
 
 @application.route('/events')

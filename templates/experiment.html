@@ -3,19 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>Photonic Conference</title>
+
     <meta name="description" content="photonic-conference">
-    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
     <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
     <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
     <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
     <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="https://rawgit.com/bestiejs/platform.js/master/platform.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-always-fullscreen-component/master/dist/aframe-always-fullscreen-component.min.js"></script>
     <script src="static/js/set-image.js"></script>
+    <script src="static/js/loader.js"></script>
     <script src="static/js/show-navigation.js"></script>
+    <script src="static/js/arrow.js"></script>
     <script src="static/js/route.js"></script>
   </head>
   <body>
-    <a-scene>
-      <a-assets>
+    <a-scene embedded always-fullscreen >
+      <a-assets loader="src: 123">
         <!-- Image links. -->
         <img id="home-thumb" src="static/media/home-thumb.png">
         <img id="arrival-thumb" src="static/media/arrival-thumb.png">
@@ -72,7 +80,7 @@
         <!-- <video id="event-video" src="static/media/event2.mp4"></video> -->
         <!-- Image link template to be reused. -->
         <script id="link" type="text/html">
-          <a-entity class="link"
+          <a-entity class="enabled"
             geometry="primitive: circle; radius: 0.4;"
             material="shader: flat; src: ${thumb}; opacity: ${opacity};"
             event-set__1="_event: mousedown; scale: 1 1 1"
@@ -83,19 +91,13 @@
             sound="on: click; src: #click-sound"></a-entity>
         </script>
 	</a-assets>
-
-
-      
-      <a-entity route="location: /home"></a-entity>
-      <a-entity route="location: /stay"></a-entity>
-      <a-entity route="location: /arrival"></a-entity>
-       
-      
       
       <!-- main-nav -->
      <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#home"></a-sky>
 
         <a-entity visible="true" id="main-control" layout="type: line; margin: 1.2" position="-3.5 2.5 -4" class="sub-control">
+
+        <!-- <a-entity visible="true" position="-3.5 2.5 -4" geometry="primitive: arrow"></a-entity> -->
 
           <a-entity template="src: #link" show-navigation="target: #main-control; hide: .sub-control" data-src="#home" data-thumb="#home-thumb" data-opacity="0.6">
           </a-entity>
@@ -129,36 +131,8 @@
 
             <a-entity  position="0.4 -0.5 -4" template="src: #link" data-opacity="0.8" data-src="#ballroom360" data-thumb="#ball-thumb" 
             show-navigation="target: #ballroom-control; hide: .sub-control"></a-entity>
-
-<!--             <a-cone color="white" radius-bottom="0.2" radius-top="0"
-                    class="link"
-                    rotation="90 0 270"
-                    position="2 1 -3.5"
-                    event-set__1="_event: mousedown; scale: 1 1 1"
-                    event-set__2="_event: mouseup; scale: 1.2 1.2 1"
-                    event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
-                    event-set__4="_event: mouseleave; scale: 1 1 1"
-                    set-image="on: click; target: #image-360; src: #room1"
-                    sound="on: click; src: #click-sound"></a-cone>
-
-            <a-cone color="white" radius-bottom="0.2" radius-top="0"
-                    class="link"
-                    rotation="-90 0 270"
-                    position="2 -1 -3"
-                    event-set__1="_event: mousedown; scale: 1 1 1"
-                    event-set__2="_event: mouseup; scale: 1.2 1.2 1"
-                    event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
-                    event-set__4="_event: mouseleave; scale: 1 1 1"
-                    set-image="on: click; target: #image-360; src: #meeting3"
-                    sound="on: click; src: #click-sound"></a-cone>
- -->
-
        </a-entity>
 
-
-
-		
-      
       <!-- HOTEL ROOM CONTROL-->
       <a-entity visible="false" id="room-control" class="sub-control">
 
@@ -234,11 +208,6 @@
 
        </a-entity>
 
-
-
-
-
-       
        <a-entity visible="false" id="suite-left-control" class="sub-control">
 
            <a-entity position="3 -3 -1" template="src: #link" data-opacity="0.9" data-src="#suite360"  data-thumb="#direct-thumb" show-navigation="target: #suite-control; hide: .sub-control"></a-entity>
@@ -270,12 +239,6 @@
            <a-entity position="-3 -1 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360-room"  data-thumb="#direct2-thumb" show-navigation="target: #suite-room-control; hide: .sub-control"></a-entity>
 
        </a-entity>
-
-
-
-
-
-
 
        <!-- PREMIUM ROOM  -->
        <a-entity visible="false" id="premium-control" class="sub-control">
@@ -332,7 +295,7 @@
           animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
           event-set__1="_event: mouseenter; color: springgreen"
           event-set__2="_event: mouseleave; color: black"
-          raycaster="objects: .link"></a-cursor>
+          raycaster="objects: .enabled"></a-cursor>
       </a-entity>
    </a-scene>
   </body>

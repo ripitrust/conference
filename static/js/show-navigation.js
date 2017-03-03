@@ -58,10 +58,15 @@ AFRAME.registerComponent('show-navigation', {
 
     hideChildren: function (parentNode) {
 
+
             for (var k = 0; k < parentNode.children.length; k ++) {
 
-                              
-                                parentNode.children[k].children[0].setAttribute("visible", "false");
+                                parentNode.children[k].setAttribute("visible", "false");
+
+                                console.log(parentNode.children[k].children[0]);
+
+                               if (parentNode.children[k].children[0])
+                                parentNode.children[k].children[0].setAttribute("class", "disabled");
 
                         }
 
@@ -71,8 +76,10 @@ AFRAME.registerComponent('show-navigation', {
 
             for (var k = 0; k < parentNode.children.length; k ++) {
 
-                              
-                                parentNode.children[k].children[0].setAttribute("visible", "true");
+                            parentNode.children[k].setAttribute("visible", "true");
+
+                            if (parentNode.children[k].children[0])
+                                    parentNode.children[k].children[0].setAttribute("class", "enabled");
 
                         }
 
