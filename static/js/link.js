@@ -21,12 +21,7 @@ AFRAME.registerComponent('link', {
             to.setAttribute("visible", "true");
             to.className = "active";
 
-
         });
-
     },
-
-
-
 });
 

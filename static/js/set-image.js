@@ -5,8 +5,6 @@
  * back in.
  */
 
-AFRAME.registerComponent('set-info', {});
-
 AFRAME.registerComponent('set-image', {
   schema: {
     on: {type: 'string'},
