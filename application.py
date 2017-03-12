@@ -12,6 +12,22 @@ def index_page():
 def home_page():
     return render_template('home.html')
 
+@application.route('/mbs')
+def mbs_page():
+    return render_template('mbs.html')
+
+@application.route('/deluxe')
+def deluxe_page():
+    return render_template('deluxe.html')
+
+@application.route('/premium')
+def premium_page():
+    return render_template('premium.html')
+
+@application.route('/suite')
+def suite_page():
+    return render_template('suite.html')
+
 @application.route('/stay')
 def stay_page():
     return render_template('stay.html')

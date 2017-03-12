@@ -1,0 +1,126 @@
+{% extends "vrbase.html" %}
+
+{% block body %}
+  <a-scene id="ancestor">
+      <a-assets loader="src: 123">
+        <!-- Image links. -->
+        
+        <img id="back-thumb" src="static/media/back-thumb.png">
+        <img id="direct-thumb" src="static/media/direct-thumb.png">
+        <img id="direct2-thumb" src="static/media/direct2-thumb.png">
+        <img id="direct3-thumb" src="static/media/direct3-thumb.png">
+        <img id="direct4-thumb" src="static/media/direct4-thumb.png">
+
+        <img id="suite360" src="static/media/suite360.jpg">
+        <img id="suite360-right" src="static/media/suite360-right.jpg">
+        <img id="suite360-left" src="static/media/suite360-left.jpg">
+        <img id="suite360-toilet" src="static/media/suite360-toilet.jpg">
+        <img id="suite360-room" src="static/media/suite360-room.jpg">
+        <img id="suite360-roomright" src="static/media/suite360-roomright.jpg">
+        <img id="suite360-roomleft" src="static/media/suite360-roomleft.jpg">
+
+        <audio id="click-sound" crossorigin="anonymous" src="static/media/click.wav"></audio>
+        <!-- <video id="event-video" src="static/media/event2.mp4"></video> -->
+        <!-- Image link template to be reused. -->
+
+        <script id="link" type="text/html">
+          <a-entity class="deactive"
+            geometry="primitive: circle; radius: 0.4;"
+            material="shader: standard; src: ${thumb}; opacity: ${opacity}; side:double;"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            sound="on: click; src: #click-sound">
+            </a-entity>
+        </script>
+    </a-assets>
+
+    <!-- Camera + cursor.  -->
+      <a-entity camera position="0 0 0" look-controls>
+
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          raycaster="recursive:true; objects: .active "></a-cursor>
+      </a-entity>
+
+        <a-entity visible="true" id="suite-scene" >
+
+      <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#suite360"></a-sky>
+
+         <a-entity position="3 -2 -1.5" rotate="90 0 0" template="src: #link" data-opacity="0.9" data-src="#suite360-right"  data-thumb="#direct-thumb" link="from: #suite-scene; to: #suite-right-scene" ></a-entity>
+
+         <a-entity position="-3 -2 -1.5" rotate="90 0 0" template="src: #link" data-opacity="0.9" data-src="#suite360-left"  data-thumb="#direct2-thumb" link="from: #suite-scene; to: #suite-left-scene"  ></a-entity>
+
+         <a-entity position="4 -0.6 -4" rotate="90 0 0" template="src: #link" data-opacity="0.9" data-src="#suite360-room"  data-thumb="#direct4-thumb" link="from: #suite-scene; to: #suite-room-scene"></a-entity>
+          
+        </a-entity>
+
+
+
+        <a-entity visible="false" id="suite-right-scene" >
+
+         <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#suite360-right"></a-sky>
+
+         <a-entity position="-1 -2.5 -4" template="src: #link" data-opacity="0.9" data-src="#suite360-toilet"  data-thumb="#direct2-thumb"  link="from: #suite-right-scene; to: #suite-toilet-scene"  ></a-entity>
+
+         <a-entity position="-3 -2 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360"  data-thumb="#direct2-thumb"  link="from: #suite-right-scene; to: #suite-scene"  ></a-entity>
+
+       </a-entity>
+
+
+       <a-entity visible="false" id="suite-toilet-scene" >
+
+        <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#suite360-toilet"></a-sky>
+
+        <a-entity position="0 -1 -2" template="src: #link" data-opacity="0.9" data-thumb="#direct2-thumb"  link="from: #suite-toilet-scene; to: #suite-scene"></a-entity>
+
+       </a-entity>
+
+       <a-entity visible="false" id="suite-left-scene" > 
+
+        <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#suite360-left"></a-sky>
+
+        <a-entity position="3 -3 -1" template="src: #link" data-opacity="0.9" data-src="#suite360"  data-thumb="#direct-thumb"  link="from: #suite-left-scene; to: #suite-scene"></a-entity>
+
+       </a-entity>
+
+
+
+       <a-entity visible="false" id="suite-room-scene" >
+
+          <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#suite360-room"></a-sky>
+
+           <a-entity position="0 -0.5 -4" template="src: #link" data-opacity="0.6" data-src="#suite360"  data-thumb="#back-thumb" link="from: #suite-room-scene; to: #suite-scene" ></a-entity>
+
+           <a-entity position="3 -1 1.5" rotation="90 0 0" template="src: #link" data-opacity="0.9" data-src="#suite360-roomright"  data-thumb="#direct-thumb" link="from: #suite-room-scene; to: #suite-roomright-scene" ></a-entity>
+
+           <a-entity position="-3 -1 1.5" rotation="90 0 0" template="src: #link" data-opacity="0.9" data-src="#suite360-roomleft"  data-thumb="#direct2-thumb" link="from: #suite-room-scene; to: #suite-roomleft-scene"  ></a-entity>
+
+       </a-entity>
+
+
+       <a-entity visible="false" id="suite-roomright-scene" >
+
+          <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#suite360-roomright"></a-sky>
+
+           <a-entity position="4 -2 -5" template="src: #link" data-opacity="0.9" data-src="#suite360-room"  data-thumb="#direct2-thumb" link="from: #suite-roomright-scene; to: #suite-room-scene" ></a-entity>
+
+       </a-entity>
+
+
+       <a-entity visible="false" id="suite-roomleft-scene" >
+
+          <a-sky rotation="0 90 -15" id="image-360" radius="10" src="#suite360-roomleft"></a-sky>
+           <a-entity position="-3 -1 -1.5" template="src: #link" data-opacity="0.9" data-src="#suite360-room"  data-thumb="#direct2-thumb" link="from: #suite-roomleft-scene; to: #suite-room-scene"></a-entity>
+
+       </a-entity>
+
+
+   </a-scene>
+
+
+{% endblock %}
